@@ -11,8 +11,8 @@
 
 (asdf:defsystem #:advent2021/test
   :depends-on (#:advent2021
-               #:fiveam)
+               #:parachute)
   :components ((:module "tests"
                 :components ((:file "package")
                              (:file "main"))))
-  :perform (test-op (op _) (symbol-call :fiveam :run-all-tests)))
+  :perform (test-op (op _) (symbol-call :parachute :test :advent2021/test)))

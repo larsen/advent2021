@@ -1,7 +1,5 @@
 (in-package #:advent2021/test)
 
-(def-suite advent2021)
-(in-suite advent2021)
+(define-test dummy
+  (is = 1 1))
 
-(test dummy
-  (is (= 1 1)))
