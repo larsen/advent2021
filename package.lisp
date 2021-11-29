@@ -1,4 +1,4 @@
 (defpackage #:advent2021
-  (:use #:cl))
+  (:use #:cl #:cl-ppcre #:alexandria #:split-sequence))
 
 
