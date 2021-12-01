@@ -7,7 +7,8 @@
   :version "0.0.1"
   :serial t
   :depends-on (#:alexandria #:cl-ppcre #:split-sequence)
-  :components ((:file "package"))
+  :components ((:file "package")
+               (:file "day1"))
   :in-order-to ((test-op (test-op #:advent2021/test))))
 
 (asdf:defsystem #:advent2021/test
