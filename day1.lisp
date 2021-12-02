@@ -11,6 +11,11 @@
                 (car couple))
           count couple))
 
+;; A much more succinct version from Reddit
+;;
+;; (defun increasing-pairs (nums)
+;;   (loop for (a b) on nums while b count (< a b)))
+
 (defun zip (f &rest lists)
   (apply #'mapcar f lists))
 
@@ -24,5 +29,3 @@
           sonar-sweeps
           (cdr sonar-sweeps)
           (cdr (cdr sonar-sweeps))))))
-
-
