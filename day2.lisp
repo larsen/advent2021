@@ -40,6 +40,8 @@ does not exist it generates an error."
                     (split "\\s+" l)
                   (list command (parse-integer param)))))
 
+;; https://www.reddit.com/r/adventofcode/comments/r6zd93/2021_day_2_solutions/hmyblm9/?utm_source=reddit&utm_medium=web2x&context=3
+
 (defun day2/solution1 ()
   (let ((subm (make-instance 'submarine)))
     (execute-instructions subm (read-course))
