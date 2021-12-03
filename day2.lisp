@@ -26,9 +26,7 @@ does not exist it generates an error."
 
 (defgeneric execute-instructions (entity instructions))
 (defmethod execute-instructions ((s submarine) instructions)
-  (loop for instruction in instructions
-        for cmd = (first instruction)
-        for param = (second instruction)
+  (loop for (cmd param) in instructions
         do (funcall (find-function-in-package cmd :advent2021)
                     s param)
         finally (return s)))
