@@ -15,10 +15,10 @@
           bit-vector))
 
 (defun most-frequent-binary-digit-in-position (report position)
-  (if (> (count 1 (mapcar (lambda (bit-vector)
-                            (aref bit-vector position))
-                          report))
-         (/ (length report) 2))
+  (if (>= (count 1 (mapcar (lambda (bit-vector)
+                             (aref bit-vector position))
+                           report))
+          (/ (length report) 2))
       1
       0))
 
@@ -34,3 +34,29 @@
          (epsilon-rate (bit-not gamma-rate)))
     (* (bit-vector-to-number gamma-rate)
        (bit-vector-to-number epsilon-rate))))
+
+(defun frequency-based-filter (report position comparison-op)
+  (if (= (length report) 1)
+      (first report)
+      (frequency-based-filter
+       (remove-if
+        (lambda (bit-vector)
+          (funcall comparison-op (aref bit-vector position)
+                   (most-frequent-binary-digit-in-position
+                    report position)))
+        report)
+       (+ position 1)
+       comparison-op)))
+
+(defun find-oxygen-generator-rating (report position)
+  (frequency-based-filter report position #'/=))
+
+(defun find-co2-scrubber-rating (report position)
+  (frequency-based-filter report position #'=))
+
+(defun day3/solution2 ()
+  (let* ((report (read-diagnostic-report))
+         (oxygen-generator-rating (find-oxygen-generator-rating report 0))
+         (co2-scrubber-rating (find-co2-scrubber-rating report 0)))
+    (* (bit-vector-to-number oxygen-generator-rating)
+       (bit-vector-to-number co2-scrubber-rating))))
