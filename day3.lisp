@@ -48,15 +48,15 @@
        (+ position 1)
        comparison-op)))
 
-(defun find-oxygen-generator-rating (report position)
-  (frequency-based-filter report position #'/=))
+(defun find-oxygen-generator-rating (report)
+  (frequency-based-filter report 0 #'/=))
 
-(defun find-co2-scrubber-rating (report position)
-  (frequency-based-filter report position #'=))
+(defun find-co2-scrubber-rating (report)
+  (frequency-based-filter report 0 #'=))
 
 (defun day3/solution2 ()
   (let* ((report (read-diagnostic-report))
-         (oxygen-generator-rating (find-oxygen-generator-rating report 0))
-         (co2-scrubber-rating (find-co2-scrubber-rating report 0)))
+         (oxygen-generator-rating (find-oxygen-generator-rating report))
+         (co2-scrubber-rating (find-co2-scrubber-rating report)))
     (* (bit-vector-to-number oxygen-generator-rating)
        (bit-vector-to-number co2-scrubber-rating))))
