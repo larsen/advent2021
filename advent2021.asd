@@ -6,11 +6,12 @@
   :license  "Specify license here"
   :version "0.0.1"
   :serial t
-  :depends-on (#:alexandria #:cl-ppcre #:split-sequence)
+  :depends-on (#:alexandria #:cl-ppcre #:split-sequence #:magicl)
   :components ((:file "package")
                (:file "day1")
                (:file "day2")
-               (:file "day3"))
+               (:file "day3")
+               (:file "day4"))
   :in-order-to ((test-op (test-op #:advent2021/test))))
 
 (asdf:defsystem #:advent2021/test
