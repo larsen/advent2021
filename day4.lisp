@@ -69,3 +69,16 @@
           do (loop for c in bingo-cards do (mark c n))
           when (game-winner-p bingo-cards)
             return (score n (game-winner-p bingo-cards)))))
+
+(defun day4/solution2 ()
+  (let ((winners '()))
+    (multiple-value-bind (drafted-numbers bingo-cards)
+        (read-bingo-game)
+      (loop for n in drafted-numbers
+            do (loop for c in bingo-cards do (mark c n)
+                     when (winner-p c)
+                       do (push (list n c) winners))
+               (setf bingo-cards (delete-if #'winner-p bingo-cards))
+            finally (let ((last-winner-and-winning-number (car winners)))
+                      (return (score (first last-winner-and-winning-number)
+                                     (second last-winner-and-winning-number))))))))
