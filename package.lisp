@@ -8,7 +8,13 @@
            day3/solution2
            day4/solution1
            day4/solution2
+
+           read-vents
+           vx
+           vy
            day5/solution1
            day5/solution2))
 
 
+(defpackage #:advent2021-sketch
+  (:use #:cl #:advent2021 #:sketch))
