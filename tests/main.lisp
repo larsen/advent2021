@@ -15,3 +15,7 @@
 (define-test day4
   (is = (day4/solution1) 71708)
   (is = (day4/solution2) 34726))
+
+(define-test day5
+  (is = (day5/solution1) 6710)
+  (is = (day5/solution2) 20121))
