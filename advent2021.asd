@@ -8,6 +8,7 @@
   :serial t
   :depends-on (#:alexandria #:cl-ppcre #:split-sequence #:magicl #:sketch)
   :components ((:file "package")
+               (:file "utils")
                (:file "day1")
                (:file "day2")
                (:file "day3")

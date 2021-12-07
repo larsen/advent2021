@@ -1,6 +1,5 @@
 (in-package #:advent2021)
 
-
 (defun read-school ()
   (mapcar #'parse-integer
           (split ","
@@ -37,11 +36,11 @@
     new-population-age))
 
 (defun day6/solution1 ()
-  (evolve-population (read-school) 80))
+  (evolve-population (read-csv-line (asdf:system-relative-pathname 'advent2021 "inputs/day6")) 80))
 
 (defun day6/solution2 ()
   (let ((population-age (make-array 9)))
-    (loop for p in (read-school)
+    (loop for p in (read-csv-line (asdf:system-relative-pathname 'advent2021 "inputs/day6"))
           do (incf (aref population-age p)))
     (loop repeat 256
           do (setf population-age (evolve-population-age-array population-age)))
