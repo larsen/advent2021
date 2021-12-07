@@ -23,3 +23,7 @@
 (define-test day6
   (is = (day6/solution1) 386755)
   (is = (day6/solution2) 1732731810807))
+
+(define-test day7
+  (is = (day7/solution1) 356922)
+  (is = (day7/solution2) 100347031))
