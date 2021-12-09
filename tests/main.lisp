@@ -31,3 +31,7 @@
 (define-test day8
   (is = (day8/solution1) 440)
   (is = (day8/solution2) 1046281))
+
+(define-test day9
+  (is = (day9/solution1) 560)
+  (is = (day9/solution2) 959136))
