@@ -40,6 +40,6 @@
     (loop for lp in low-points
           do (setf basin (expand-low-point lp caves-map))
              (loop for (row col) in basin
-                   do (with-pen water-pen
+                   do (with-pen (make-pen :fill (rgb 0 0 (/ (magicl:tref caves-map row col) 10)))
                         (circle (+ 10 (* (* 2 point-size) col))
                                 (+ 10 (* (* 2 point-size) row)) point-size))))))
