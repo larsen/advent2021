@@ -25,6 +25,7 @@
            read-caves-map
            neighbours
            is-low-point-p
+           expand-low-point
            day9/solution1
            day9/solution2))
 

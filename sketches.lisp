@@ -15,13 +15,14 @@
 
 (defsketch caves ((caves-map (read-caves-map))
                   (water-pen (make-pen :fill +blue+)))
-  (background +yellow+)
+  (background +black+)
 
   (let* ((shape (magicl:shape caves-map))
          (rows (first shape))
          (cols (second shape))
-         (point-size 10)
-         (basin '((0 9))))
+         (point-size 3)
+         (low-points '())
+         (basin '()))
 
     ;; draw map
     (loop for col from 0 below cols
@@ -30,22 +31,15 @@
                         (circle (+ 10 (* (* 2 point-size) col))
                                 (+ 10 (* (* 2 point-size) row)) point-size))))
 
-    ;; extend basin
-    (loop with n-added-points
-          do (setf n-added-points 0)
-             (loop for (p-row p-col) in basin
-                   do (loop for (n-row n-col) in (neighbours p-row p-col caves-map)
-                            when (and (/= 9 (magicl:tref caves-map n-row n-col))
-                                      (not (find (list n-row n-col) basin :test 'equalp)))
-                              do (push (list n-row n-col) basin)
-                                 (incf n-added-points)
-                            finally (return n-added-points)))
-          when (zerop n-added-points)
-            return basin)
+    ;; Collect all low-points
+    (loop for col from 0 below cols
+          append (loop for row from 0 below rows
+                       when (is-low-point-p row col caves-map)
+                         do (push (list row col) low-points)))
 
-    ;; paint basin
-    ;; (loop for (row col) in basin
-    ;;       do (with-pen water-pen
-    ;;            (circle (+ 10 (* (* 2 point-size) col))
-    ;;                    (+ 10 (* (* 2 point-size) row)) point-size)))
-    ))
+    (loop for lp in low-points
+          do (setf basin (expand-low-point lp caves-map))
+             (loop for (row col) in basin
+                   do (with-pen water-pen
+                        (circle (+ 10 (* (* 2 point-size) col))
+                                (+ 10 (* (* 2 point-size) row)) point-size))))))

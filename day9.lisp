@@ -36,31 +36,35 @@
                                    when (is-low-point-p row col caves-map)
                                      collect (+ 1 (magicl:tref caves-map row col)))))))
 
+(defun expand-low-point (low-point caves-map)
+  (loop with basin = (list low-point)
+        with n-added-points = 0
+        do (setf n-added-points 0)
+           (loop for (p-row p-col) in basin
+                 do (loop for (n-row n-col) in (neighbours p-row p-col caves-map)
+                          when (and (/= 9 (magicl:tref caves-map n-row n-col))
+                                    (not (find (list n-row n-col) basin :test 'equalp)))
+                            do (push (list n-row n-col) basin)
+                               (incf n-added-points)
+                          finally (return n-added-points)))
+        when (zerop n-added-points)
+          return basin))
+
 (defun day9/solution2 ()
   (let* ((caves-map (read-caves-map))
          (rows (first (magicl:shape caves-map)))
          (cols (second (magicl:shape caves-map)))
          (low-points '()))
 
+    ;; Collect all low-points
     (loop for col from 0 below cols
           append (loop for row from 0 below rows
                        when (is-low-point-p row col caves-map)
                          do (push (list row col) low-points)))
 
-    (reduce #'*
-            (subseq (sort
-                     (loop for low-point in low-points
-                           collect (loop with basin = (list low-point)
-                                         with n-added-points = 0
-                                         do (setf n-added-points 0)
-                                            (loop for (p-row p-col) in basin
-                                                  do (loop for (n-row n-col) in (neighbours p-row p-col caves-map)
-                                                           when (and (/= 9 (magicl:tref caves-map n-row n-col))
-                                                                     (not (find (list n-row n-col) basin :test 'equalp)))
-                                                             do (push (list n-row n-col) basin)
-                                                                (incf n-added-points)
-                                                           finally (return n-added-points)))
-                                         when (zerop n-added-points)
-                                           return (length basin)))
-                     #'>)
-                    0 3))))
+    (reduce #'* (subseq (sort
+                         ;; Compute basins
+                         (loop for low-point in low-points
+                               collect (length (expand-low-point low-point caves-map)))
+                         #'>)
+                        0 3))))
