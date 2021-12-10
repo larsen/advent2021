@@ -18,6 +18,7 @@
                (:file "day7")
                (:file "day8")
                (:file "day9")
+               (:file "day10")
                (:file "sketches"))
   :in-order-to ((test-op (test-op #:advent2021/test))))
 
