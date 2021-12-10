@@ -1,6 +1,6 @@
 (in-package #:advent2021-sketch)
 
-;; Day
+;; Day 5
 
 (defsketch ocean-floor ((vents (read-vents))
                         (width 1000)
