@@ -30,7 +30,12 @@
            day9/solution2
 
            day10/solution1
-           day10/solution2))
+           day10/solution2
+
+           read-octopus-grid
+           octopus-grid-step
+           day11/solution1
+           day11/solution2))
 
 
 (defpackage #:advent2021-sketch
