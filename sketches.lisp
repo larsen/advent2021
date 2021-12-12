@@ -65,6 +65,6 @@
     (text (format nil "~a" counter) 10 10)))
 
 (defmethod kit.sdl2:textinput-event ((window octopus-grid-sketch) ts text)
-  (setf (slot-value window 'octopus-grid)
-        (octopus-grid-step (slot-value window 'octopus-grid)))
-  (incf (slot-value window 'counter)))
+  (with-slots (octopus-grid counter) window
+    (setf octopus-grid (octopus-grid-step octopus-grid))
+    (incf counter)))
