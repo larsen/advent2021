@@ -43,3 +43,8 @@
 (define-test day11
   (is = (day11/solution1) 1757)
   (is = (day11/solution2) 422))
+
+(define-test day12
+  (is = (day12/solution1) 4707)
+  (is = (day12/solution1) (day12/solution1-iterative))
+  (is = (day12/solution2) 130493))
