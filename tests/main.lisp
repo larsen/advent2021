@@ -48,3 +48,7 @@
   (is = (day12/solution1) 4707)
   (is = (day12/solution1) (day12/solution1-iterative))
   (is = (day12/solution2) 130493))
+
+(define-test day13
+  (is = (day13/solution1) 693)
+  (is string= (day13/solution2) "UCLZRAZU"))
